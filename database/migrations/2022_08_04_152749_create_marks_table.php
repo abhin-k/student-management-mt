@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('marks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id');
+            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->string('maths');
             $table->string('science');
             $table->string('history');

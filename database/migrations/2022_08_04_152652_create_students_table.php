@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedInteger('age');
             $table->enum('gender', ['m', 'f']);
-            $table->foreignId('teacher_id');
+            $table->foreignId('teacher_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

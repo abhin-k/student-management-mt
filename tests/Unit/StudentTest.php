@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Models\Mark;
 use App\Models\Student;
 use App\Models\Teacher;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,7 +24,7 @@ class StudentTest extends TestCase
         $this->assertInstanceOf(Teacher::class, $student->teacher);
     }
 
-    public function test_student_has_mark()
+    public function test_student_has_marks()
     {
         $student = Student::factory()
             ->for(Teacher::factory())
@@ -33,6 +34,6 @@ class StudentTest extends TestCase
             'student_id' => $student->id
         ]);
 
-        $this->assertInstanceOf(Mark::class, $student->mark);
+        $this->assertInstanceOf(Collection::class, $student->mark);
     }
 }
