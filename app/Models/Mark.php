@@ -14,7 +14,8 @@ class Mark extends Model
         'science',
         'history',
         'term',
-        'total'
+        'total',
+        'student_id'
     ];
 
     public function student()

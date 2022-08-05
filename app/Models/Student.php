@@ -23,6 +23,6 @@ class Student extends Model
 
     public function mark()
     {
-        return $this->hasOne(Mark::class);
+        return $this->hasMany(Mark::class);
     }
 }
