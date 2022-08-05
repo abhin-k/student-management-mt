@@ -12,12 +12,14 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::with('teacher')->paginate(10);
+
         return view('students.index', compact('students'));
     }
 
     public function create()
     {
         $teachers = Teacher::orderBy('name')->get();
+
         return view('students.create', compact('teachers'));
     }
 
@@ -33,6 +35,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $teachers = Teacher::orderBy('name')->get();
+        
         return view('students.edit', compact('student', 'teachers'));
     }
 

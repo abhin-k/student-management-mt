@@ -34,6 +34,6 @@ class StudentTest extends TestCase
             'student_id' => $student->id
         ]);
 
-        $this->assertInstanceOf(Collection::class, $student->mark);
+        $this->assertInstanceOf(Collection::class, $student->marks);
     }
 }
