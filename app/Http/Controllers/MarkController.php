@@ -11,19 +11,23 @@ class MarkController extends Controller
     public function index()
     {
         $marks = Mark::with('student')->latest()->paginate(10);
+
         return view('marks.index', compact('marks'));
     }
 
     public function create()
     {
         $students = Student::orderBy('name')->get();
+
         return view('marks.create', compact('students'));
     }
 
     public function store(StoreMarkRequest $request)
     {
-        $total = $request->science + $request->history + $request->maths;
-        Mark::create(array_merge($request->validated(), ['total' => $total]));
+
+        Mark::create(array_merge($request->validated(), [
+            'total' => $this->calculateTotal($request)
+        ]));
 
         return redirect()
             ->route('marks.index')
@@ -33,14 +37,15 @@ class MarkController extends Controller
     public function edit(Mark $mark)
     {
         $students = Student::orderBy('name')->get();
+        
         return view('marks.edit', compact('mark', 'students'));
     }
 
     public function update(StoreMarkRequest $request, Mark $mark)
     {
-        $total = $request->science + $request->history + $request->maths;
-
-        $mark->update(array_merge($request->validated(), ['total' => $total]));
+        $mark->update(array_merge($request->validated(), [
+            'total' => $this->calculateTotal($request)
+        ]));
 
         return redirect()
             ->route('marks.index')
@@ -54,5 +59,10 @@ class MarkController extends Controller
         return redirect()
             ->route('marks.index')
             ->with('success', 'Marks deleted successfully!');
+    }
+
+    private function calculateTotal($request)
+    {
+        return $request->science + $request->history + $request->maths;
     }
 }

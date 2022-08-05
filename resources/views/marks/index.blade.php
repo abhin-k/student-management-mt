@@ -35,7 +35,7 @@
                                     <td>{{ $mark->history }}</td>
                                     <td>{{ ucwords($mark->term) }}</td>
                                     <td>{{ $mark->total }}</td>
-                                    <td>{{ $mark->created_at }}</td>
+                                    <td>{{ $mark->created_at->format('M d, Y h:i A') }}</td>
                                     <td>
                                         <a href="{{ route('marks.edit', $mark) }}">Edit</a>
                                         <a href="#" onclick="var result = confirm('Are you sure you want to delete this record?');if(result){event.preventDefault();document.getElementById('delete-form-{{$mark->id}}').submit();}">
